@@ -7,7 +7,7 @@ pipeline {
             }
         }
         stage('Publish') {
-		    environment { 
+	    environment { 
                 DOCKER_PASSWORD = credentials('DOCKER_PASSWORD') 
             }
             when {
@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-			    sh "docker login -u afalko -p ${DOCKER_PASSWORD}"
+		sh "docker login -u afalko -p ${DOCKER_PASSWORD}"
                 sh "docker push afalko/alpine-java:${BUILD_ID}"
             }
         }
@@ -26,15 +26,15 @@ pipeline {
                     BRANCH_NAME == "master"
                 }
             }
-		    environment {
-				git_api_url = 'https://api.github.com'
-				git_api_token = credentials('DOCKERFILE_IMAGE_UPDATE_TOKEN')
-				image_map_store = 'docker-tag-store-df17-demo'
-			}
+	    environment {
+		git_api_url = 'https://api.github.com'
+		git_api_token = credentials('DOCKERFILE_IMAGE_UPDATE_TOKEN')
+		image_map_store = 'docker-tag-store-df17-demo'
+	    }
             steps {
                 sh "docker run --rm -e git_api_token -e git_api_url \
-					salesforce/dockerfile-image-update --org afalko \
-					parent afalko/alpine-java ${BUILD_ID} ${image_map_store}"
+			salesforce/dockerfile-image-update --org afalko \
+			parent afalko/alpine-java ${BUILD_ID} ${image_map_store}"
             }
         }
     }
