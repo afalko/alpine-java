@@ -33,7 +33,7 @@ pipeline {
 	    }
             steps {
                 sh "docker run --rm -e git_api_token -e git_api_url \
-			salesforce/dockerfile-image-update --org afalko \
+			salesforce/dockerfile-image-update -o afalko \
 			parent afalko/alpine-java ${BUILD_ID} ${image_map_store}"
             }
         }
