@@ -1,4 +1,4 @@
-FROM afalko/alpine:38
+FROM afalko/alpine:39
 
 RUN apk update && apk add openjdk8
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
